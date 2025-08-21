@@ -41,10 +41,10 @@ function addCameraPositionLogger(viewer) {
 }
 function flyTo(viewer) {
   viewer.camera.flyTo({
-    destination: Cesium.Cartesian3.fromDegrees(117.258774, 31.818545, 4900),
+    destination: Cesium.Cartesian3.fromDegrees(117.258774, 31.813545, 5500),
     orientation: {
       heading: Cesium.Math.toRadians(0),
-      pitch: Cesium.Math.toRadians(-90.0),
+      pitch: Cesium.Math.toRadians(-60.0),
     },
   })
 }

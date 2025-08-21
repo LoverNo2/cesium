@@ -7,7 +7,7 @@ import * as Cesium from 'cesium'
 Cesium.Ion.defaultAccessToken = import.meta.env.VITE_CESIUM_ION_TOKEN
 import { Viewer, Color } from 'cesium'
 import { flyTo, addCameraPositionLogger, cesiumConfig, addEntity } from '@/utils/cesium'
-import { createCylinderByArray } from '@/utils/cylinder'
+import { createPolygonByArray } from '@/utils/polygon'
 import { onMounted } from 'vue'
 
 let viewer
@@ -20,7 +20,7 @@ onMounted(() => {
   addEntity(viewer)
   flyTo(viewer)
   addCameraPositionLogger(viewer)
-  createCylinderByArray(
+  createPolygonByArray(
     viewer,
     [
       {
@@ -47,7 +47,7 @@ onMounted(() => {
         units: 'kilometers', //千米
         properties: { foo: 'bar' },
       },
-      heightRange: [4500, 4550],
+      heightRange: [4500, 4700],
       borderWidth: 0.001,
     }
   )

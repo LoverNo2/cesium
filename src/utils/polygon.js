@@ -1,7 +1,7 @@
 import { circle } from '@turf/turf'
 import { Cartesian3 } from 'cesium'
 
-function createCylinder(viewer, options) {
+function createPolygon(viewer, options) {
   const { center, outerRadius, innerRadius, option, heightRange, color } = options
 
   let outerCircle = circle(center, outerRadius, option).geometry.coordinates[0].flat()
@@ -9,7 +9,7 @@ function createCylinder(viewer, options) {
 
   let innerCircle = circle(center, innerRadius, option).geometry.coordinates[0].flat()
   innerCircle.splice(innerCircle.length - 2, 2)
-  const cylinderEntity = viewer.entities.add({
+  const polygonEntity = viewer.entities.add({
     polygon: {
       hierarchy: {
         positions: Cartesian3.fromDegreesArray(outerCircle),
@@ -24,13 +24,13 @@ function createCylinder(viewer, options) {
       material: color,
     },
   })
-  return cylinderEntity
+  return polygonEntity
 }
 
-function createCylinderWithOutline(viewer, options) {
+function createPolygonWithOutline(viewer, options) {
   const { center, outerRadius, innerRadius, option, heightRange, color, outerColor, borderWidth } =
     options
-  createCylinder(viewer, {
+  createPolygon(viewer, {
     center,
     outerRadius: outerRadius - borderWidth,
     innerRadius,
@@ -38,7 +38,7 @@ function createCylinderWithOutline(viewer, options) {
     heightRange,
     color: color,
   })
-  createCylinder(viewer, {
+  createPolygon(viewer, {
     center,
     outerRadius,
     innerRadius: outerRadius - borderWidth,
@@ -48,15 +48,15 @@ function createCylinderWithOutline(viewer, options) {
   })
 }
 
-function createCylinderByArray(viewer, cylinderArray, defaultOptions) {
+function createPolygonByArray(viewer, polygonArray, defaultOptions) {
   const createdEntities = []
   let previousOuterRadius = null
 
-  for (let i = 0; i < cylinderArray.length; i++) {
-    const cylinderItem = cylinderArray[i]
+  for (let i = 0; i < polygonArray.length; i++) {
+    const polygonItem = polygonArray[i]
     const options = {
       ...defaultOptions,
-      ...cylinderItem,
+      ...polygonItem,
     }
     let {
       center,
@@ -75,7 +75,7 @@ function createCylinderByArray(viewer, cylinderArray, defaultOptions) {
     } else {
       currentInnerRadius = previousOuterRadius
     }
-    createCylinderWithOutline(viewer, {
+    createPolygonWithOutline(viewer, {
       center,
       outerRadius,
       innerRadius: currentInnerRadius,
@@ -100,4 +100,4 @@ function createCylinderByArray(viewer, cylinderArray, defaultOptions) {
 
   return createdEntities
 }
-export { createCylinderByArray }
+export { createPolygonByArray }
