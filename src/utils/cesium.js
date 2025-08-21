@@ -1,7 +1,8 @@
 import * as Cesium from 'cesium'
+
 const cesiumConfig = {
   homeButton: false,
-  sceneModePicker: false,
+  sceneModePicker: true,
   fullscreenButton: false,
   infoBox: false,
   selectionIndicator: false,
@@ -16,8 +17,10 @@ const cesiumConfig = {
     contextType: 2,
   },
   creditContainer: document.createElement('div'),
+  imageryProvider: new Cesium.UrlTemplateImageryProvider({
+    url: 'https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',
+  }),
 }
-
 function addCameraPositionLogger(viewer) {
   viewer.camera.moveEnd.addEventListener(() => {
     const cartesianPosition = viewer.camera.position
@@ -26,7 +29,7 @@ function addCameraPositionLogger(viewer) {
     if (cartographicPosition) {
       const longitude = Cesium.Math.toDegrees(cartographicPosition.longitude)
       const latitude = Cesium.Math.toDegrees(cartographicPosition.latitude)
-      const height = Cesium.Math.toDegrees(cartographicPosition.height)
+      const height = cartographicPosition.height
 
       console.log(
         `当前位置：经度=${longitude.toFixed(6)}, 纬度=${latitude.toFixed(6)}, 高度=${height.toFixed(
@@ -38,10 +41,10 @@ function addCameraPositionLogger(viewer) {
 }
 function flyTo(viewer) {
   viewer.camera.flyTo({
-    destination: Cesium.Cartesian3.fromDegrees(117.274783, 31.817392, 5000),
+    destination: Cesium.Cartesian3.fromDegrees(117.258774, 31.818545, 4900),
     orientation: {
       heading: Cesium.Math.toRadians(0),
-      pitch: Cesium.Math.toRadians(-60.0),
+      pitch: Cesium.Math.toRadians(-90.0),
     },
   })
 }
