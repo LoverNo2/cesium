@@ -1,18 +1,22 @@
 import * as Cesium from 'cesium'
 
 const cesiumConfig = {
-  homeButton: false,
-  sceneModePicker: true,
-  fullscreenButton: false,
-  infoBox: false,
-  selectionIndicator: false,
-  baseLayerPicker: false,
-  shadows: true,
-  shouldAnimate: true,
   animation: false,
-  timeline: false,
+  baseLayerPicker: false,
+  fullscreenButton: false,
+  vrButton: false,
   geocoder: false,
+  homeButton: false,
+  infoBox: false,
+  sceneModePicker: false,
+  selectionIndicator: false,
+  timeline: false,
   navigationHelpButton: false,
+  navigationInstructionsInitiallyVisible: false,
+  scene3DOnly: true,
+
+  shadows: true,
+
   contextOptions: {
     contextType: 2,
   },
