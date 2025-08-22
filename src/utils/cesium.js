@@ -17,9 +17,6 @@ const cesiumConfig = {
     contextType: 2,
   },
   creditContainer: document.createElement('div'),
-  imageryProvider: new Cesium.UrlTemplateImageryProvider({
-    url: 'https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',
-  }),
 }
 function addCameraPositionLogger(viewer) {
   viewer.camera.moveEnd.addEventListener(() => {
